@@ -1,0 +1,10 @@
+apply plugin: 'java-library'
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    compile "io.reactivex.rxjava2:rxjava:2.2.2"
+    implementation 'junit:junit:4.12'
+}
+
+sourceCompatibility = "1.8"
+targetCompatibility = "1.8"
