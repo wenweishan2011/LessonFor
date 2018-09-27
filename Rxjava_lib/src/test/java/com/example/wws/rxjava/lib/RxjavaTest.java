@@ -83,7 +83,7 @@ public class RxjavaTest {
     @Test
     public void testflatMap(){
         Observable.just("Hello")
-//                .flatMap(toString().toCharArray().forEach((p) -> System.out.println(p)))
+//                .flatMap(toString().toCharArray().forEach((p) -> System.out.println(p)))sss
                 .flatMap(s -> Observable.fromArray(s))
                 .subscribe(s -> System.out.println("result: " + s));
     }
