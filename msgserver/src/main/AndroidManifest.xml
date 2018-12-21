@@ -18,6 +18,7 @@
         </activity>
         <service
             android:name=".AccountService"
+            android:process=":remote"
             android:enabled="true"
             android:exported="true">
             <intent-filter>

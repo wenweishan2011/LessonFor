@@ -1,19 +1,18 @@
 package com.example.wws.msgclient;
 
+import android.app.Activity;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
 import android.os.Message;
 import android.os.Messenger;
 import android.os.RemoteException;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
 
     private Messenger mServerMessenger;
 
@@ -46,12 +45,12 @@ public class MainActivity extends AppCompatActivity {
         public void onServiceDisconnected(final ComponentName name) {
             Log.d("test", "onServiceDisconnected: ");
             mServerMessenger = null;
-            Intent intent = new Intent();
-            intent.setAction("com.wws.messenger");
-            intent.setPackage("com.example.wws.msgserver");
-            startService(intent);
+//            Intent intent = new Intent();
+//            intent.setAction("com.wws.messenger");
+//            intent.setPackage("com.example.wws.msgserver");
+//            startService(intent);
 
-            bindService(intent, mMessengerConnection, Context.BIND_AUTO_CREATE);
+//            bindService(intent, mMessengerConnection, Context.BIND_AUTO_CREATE);
         }
     };
 
@@ -62,8 +61,10 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent();
         intent.setAction("com.wws.messenger");
         intent.setPackage("com.example.wws.msgserver");
-        bindService(intent, mMessengerConnection, Context.BIND_AUTO_CREATE);
-        
+//        bindService(intent, mMessengerConnection, Context.BIND_AUTO_CREATE);
+
+        startService(intent);
+//        startForegroundService(intent);
         
         findViewById(R.id.tv).setOnClickListener(new View.OnClickListener() {
             @Override

@@ -1,1 +1,1 @@
-include ':app', ':javase_lesson', ':net_lib', ':Rxjava_lib', ':daggerdemo', ':msgserver', ':msgclient'
+include /*':app', ':javase_lesson', ':net_lib', ':Rxjava_lib', ':daggerdemo', ':msgserver', ':msgclient', ':mbbsdemo', */':explorerdemo2'
