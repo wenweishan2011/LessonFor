@@ -1,0 +1,156 @@
+<resources>
+    <string-array name="support_pic_format">
+        <item>jpg</item>
+        <item>jpeg</item>
+        <item>png</item>
+        <item>bmp</item>
+    </string-array>
+
+    <string-array name="support_video_format">
+        <item>mp4</item>
+        <item>mkv</item>
+        <item>rm</item>
+        <item>rmvb</item>
+    </string-array>
+
+    <string name="app_name">文件管理</string>
+    <string name="title_activity_file">FileActivity</string>
+    <string name="title_activity_lib">LibActivity</string>
+    <string name="title_activity_lib_menu">LibMenuActivity</string>
+    <string name="title_activity_input_file_name_avtivity">InputFileNameAvtivity</string>
+    <string name="title_activity_file_bottom_menu">FileBottomMenu</string>
+    <string name="title_activity_detail_info_dialog">DetailInfoDialog</string>
+    <string name="title_activity_text_edit">极豆文本编辑</string>
+    <string name="show_hidden_close">不显示隐藏文件</string>
+    <string name="show_hidden_open">显示隐藏文件</string>
+    <string name="file_not_exist">文件不存在</string>
+    <string name="file_exist">文件已存在</string>
+    <string name="file_open_failed">文件无法打开</string>
+    <string name="no_read_permission">没有读权限</string>
+    <string name="built_in_stroage">内部存储</string>
+    <string name="stroage_unmount">磁盘已卸载</string>
+    <string name="stroage_not_mounted">磁盘未挂载</string>
+    <string name="file_not_exist_refresh">文件不存在，请刷新页面或更新媒体库</string>
+    <string name="file_not_exist_up">"文件不存在，返回上级目录"</string>
+    <string name="enter_correct_filename">请输入合法的文件名</string>
+    <string name="create_success">新建成功</string>
+    <string name="create_failed_exist">新建失败,"%1$s"已存在</string>
+    <string name="create_failed_unmount">新建失败，磁盘已卸载</string>
+    <string name="rename_failed_exist">重命名失败,"%1$s"已存在</string>
+    <string name="rename_failed_not_exist">重命名失败,"%1$s"不存在</string>
+    <string name="rename_failed_unmount">重命名失败，磁盘已卸载</string>
+    <string name="rename_failed">重命名失败</string>
+    <string name="rename_success">重命名成功</string>
+    <string name="copy_hint">在%1$s中存在以下同名文件：\n %2$s</string>
+    <string name="path">路径</string>
+    <string name="file_path">路径：%1$s</string>
+    <string name="size">大小：%1$s</string>
+    <string name="edit_time">修改时间：%1$s</string>
+    <string name="time_format">yyyy年MM月dd日 HH:mm</string>
+    <string name="file_transfer">文件传输</string>
+    <string name="disconnect">断开连接</string>
+    <string name="not_connect">未连接</string>
+    <string name="connected">已连接</string>
+    <string name="connecting">连接中</string>
+    <string name="connected_complete">已连接成功</string>
+    <string name="transfering">传输中</string>
+    <string name="file_transfer_complete">文件传输已完成!</string>
+    <string name="file_transfering">正在进行文件传输。。。</string>
+    <string name="connect_hint">操作极豆手机客户端进行文件传输</string>
+    <string name="finish_hint">文件路径:内部存储/Download</string>
+    <string name="finish_hint2">前往查看</string>
+    <string name="connect_hint2">使用极豆手机客户端扫描二维码，即刻连接</string>
+    <string name="left">可用</string>
+    <string name="calculate">计算容量中</string>
+    <string name="refresh">刷新</string>
+    <string name="new_folder">新建文件夹</string>
+    <string name="selected_count">已选择%1$d项</string>
+    <string name="calculating_space">正在计算大小</string>
+    <string name="edit">编辑</string>
+    <string name="copy">复制</string>
+    <string name="cut">剪切</string>
+    <string name="more">更多</string>
+    <string name="conflict">冲突</string>
+    <string name="conflict_hint">为后续冲突提供此选项</string>
+    <string name="jump">跳过</string>
+    <string name="override">覆盖</string>
+    <string name="close">关闭</string>
+    <string name="file_name">文件名称</string>
+    <string name="delete">删除</string>
+    <string name="delete_confirm">确认删除？</string>
+    <string name="cancel">取消</string>
+    <string name="rename">重命名</string>
+    <string name="detail">详情</string>
+    <string name="enter_filename">请输入文件名</string>
+    <string name="confirm">确认</string>
+    <string name="paste">粘贴</string>
+    <string name="operating_hint">操作中，请稍后</string>
+    <string name="operating">正在操作</string>
+    <string name="select_all">全选</string>
+    <string name="delecting">正在删除</string>
+    <string name="copying">正在复制</string>
+    <string name="moving">正在移动</string>
+    <string name="unknow_operate">unknown operate</string>
+    <string name="cut_success">剪贴成功</string>
+    <string name="cut_fail_unmount">剪贴失败，磁盘未挂载</string>
+    <string name="cut_fail_space">剪贴失败，磁盘空间不足</string>
+    <string name="cut_illegal">非法操作，不能剪贴到子文件夹中</string>
+    <string name="cut_fail">剪贴失败</string>
+    <string name="unknow">unknown</string>
+    <string name="copy_success">复制成功</string>
+    <string name="copy_fail_unmount">复制失败，磁盘未挂载</string>
+    <string name="copy_fail_space">复制失败，磁盘空间不足</string>
+    <string name="copy_illigen">非法操作，不能复制到子文件夹中</string>
+    <string name="copy_fail">复制失败</string>
+    <string name="delete_fail_unmount">删除失败，磁盘已挂载</string>
+    <string name="delete_success">删除成功</string>
+    <string name="delete_fail">删除失败</string>
+    <string name="partial_delete_fail">部分文件未能删除，请稍后重试</string>
+    <string name="folder">文件夹</string>
+    <string name="picture">图片</string>
+    <string name="video">视频</string>
+    <string name="audio">音频</string>
+    <string name="zip_file">压缩文件</string>
+    <string name="apk">安装文件</string>
+    <string name="word">WORD文档</string>
+    <string name="excel">电子表格</string>
+    <string name="ppt">幻灯片</string>
+    <string name="visio">Visio图形</string>
+    <string name="bt">BT种子</string>
+    <string name="iso">光盘镜像</string>
+    <string name="msi">msi文件</string>
+    <string name="flash">flash动画</string>
+    <string name="html">网页</string>
+    <string name="csv">csv文件</string>
+    <string name="css">css文件</string>
+    <string name="txt">文本文档</string>
+    <string name="xml">xml文件</string>
+    <string name="log">log文件</string>
+    <string name="vcs">备忘录</string>
+    <string name="vcf">名片</string>
+    <string name="res">主题资源</string>
+    <string name="file_too_large">当前文件过大，仅显示前面10M的内容</string>
+    <string name="content_empty">暂无内容</string>
+
+    <string name="show_mount">存储路径</string>
+    <string name="built_in_storage">内部存储</string>
+    <string name="mobile_storage">外部存储</string>
+    <string name="wallpaper_lib">壁纸库</string>
+    <string name="wallpaper">壁纸</string>
+    <string name="submint">确定</string>
+
+
+    <string name="fileSizeSuffix">%1$s%2$s</string>
+    <!-- Suffix added to a number to signify size in bytes. -->
+    <string name="byteShort">B</string>
+    <!-- Suffix added to a number to signify size in kilobytes. -->
+    <string name="kilobyteShort">KB</string>
+    <!-- Suffix added to a number to signify size in megabytes. -->
+    <string name="megabyteShort">MB</string>
+    <!-- Suffix added to a number to signify size in gigabytes. -->
+    <string name="gigabyteShort">GB</string>
+    <!-- Suffix added to a number to signify size in terabytes. -->
+    <string name="terabyteShort">TB</string>
+    <!-- Suffix added to a number to signify size in petabytes. -->
+    <string name="petabyteShort">PB</string>
+</resources>
