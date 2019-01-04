@@ -4,27 +4,84 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    tools:context=".MainActivity" >
+    tools:context=".MainActivity">
+
     <LinearLayout
         android:id="@+id/layout_left"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="2"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/volumeList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginRight="10dp"
-            />
+            android:layout_marginRight="10dp" />
     </LinearLayout>
+
     <LinearLayout
-        android:id="@+id/container"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="8"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
+
+        <TabHost
+            android:id="@+id/tabhost"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TabWidget
+                android:id="@android:id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <FrameLayout
+                android:id="@android:id/tabcontent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <!-- 定义第一个标签页的内容 -->
+                <LinearLayout
+                    android:id="@+id/tab01"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <!--<TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="第一个标签页的第1个TextView组件"
+                        android:textSize="8pt" />-->
+                </LinearLayout>
+                <!-- 定义第二个标签页的内容 -->
+                <LinearLayout
+                    android:id="@+id/tab02"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <!--<TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="第二个标签页的第1个TextView组件"
+                        android:textSize="8pt" />-->
+                </LinearLayout>
+                <!-- 定义第三个标签页的内容 -->
+                <LinearLayout
+                    android:id="@+id/tab03"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <!--<TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="第三个标签页的第1个TextView组件"
+                        android:textSize="8pt" />-->
+                </LinearLayout>
+            </FrameLayout>
+        </TabHost>
+
+        <RelativeLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
     </LinearLayout>
 </LinearLayout>

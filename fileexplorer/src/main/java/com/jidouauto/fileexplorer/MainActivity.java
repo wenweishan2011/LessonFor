@@ -4,18 +4,16 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TabHost;
+import android.widget.Toast;
 
 import com.jidouauto.fileexplorer.adapter.VolumeListAdapter;
 import com.jidouauto.fileexplorer.entity.VolumeInfo;
-import com.jidouauto.fileexplorer.manager.MediaStoreManager;
 import com.jidouauto.fileexplorer.ui.main.FileViewModel;
 import com.jidouauto.fileexplorer.ui.main.MainFragment;
-import com.xuexiang.rxutil2.rxjava.RxJavaUtils;
-import com.xuexiang.rxutil2.rxjava.task.RxIOTask;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,37 +27,44 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class MainActivity extends AppCompatActivity {
     public static final String VOLUME_PATH = "volume_path";
+    public static final String TAB_SELECTED = "tab_selected";
+
+    public static final int TAB_ALL = 0;
+    public static final int TAB_PIC = 1;
+    public static final int TAB_VIDEO = 2;
 
     private FileViewModel mFileViewModel;
     private RecyclerView mVolumesView;
-    private Set<VolumeInfo> volumeList;
     private int mCurrentVolumeSeleted = 0;
+    private TabHost mTabHost;
+
+    private MutableLiveData<List<VolumeInfo>> mVolumes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
+        if(!requestActivityPremission()){
+            return;
+        }
         mFileViewModel = ViewModelProviders.of(this).get(FileViewModel.class);
         mVolumesView = findViewById(R.id.volumeList);
-
+        mTabHost = findViewById(R.id.tabhost);
+        mTabHost.setup();
+        initTab();
+        mTabHost.setCurrentTab(TAB_ALL);
         final VolumeListAdapter adapter = new VolumeListAdapter(this);
         mVolumesView.setAdapter(adapter);
         mVolumesView.setLayoutManager(new LinearLayoutManager(this));
 
-        final MutableLiveData<List<VolumeInfo>> volumes = mFileViewModel.getVolumes();
-        volumes.observe(this, new Observer<List<VolumeInfo>>() {
+        mVolumes = mFileViewModel.getVolumes();
+        mVolumes.observe(this, new Observer<List<VolumeInfo>>() {
             @Override
             public void onChanged(List<VolumeInfo> volumeInfos) {
                 if(volumeInfos.size() < mCurrentVolumeSeleted){
                     mCurrentVolumeSeleted = 0;
                 }
-                final MainFragment fragment = MainFragment.newInstance();
-                Bundle args = new Bundle();
-                args.putString(VOLUME_PATH, volumeInfos.get(mCurrentVolumeSeleted).path);
-                fragment.setArguments(args);
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.container, fragment)
-                        .commitNow();
+                replaceFragment(volumeInfos.get(mCurrentVolumeSeleted).path);
                 adapter.setVolumes(volumeInfos);
             }
         });
@@ -67,27 +72,47 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(View v, int adapterPosition) {
                 mCurrentVolumeSeleted = adapterPosition;
-                final MainFragment fragment = MainFragment.newInstance();
-                Bundle args = new Bundle();
-                args.putString(VOLUME_PATH, volumes.getValue().get(adapterPosition).path);
-                fragment.setArguments(args);
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.container, fragment)
-                        .commitNow();
+                replaceFragment(mVolumes.getValue().get(adapterPosition).path);
             }
         });
+    }
 
-        if(!requestActivityPremission()){
-            return;
-        }
+    private void replaceFragment(String path) {
+        final MainFragment fragment = MainFragment.newInstance();
+        Bundle args = new Bundle();
+        args.putString(VOLUME_PATH, path);
+        args.putInt(TAB_SELECTED, mTabHost.getCurrentTab());
+        fragment.setArguments(args);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.container, fragment)
+                .commitNow();
+    }
 
-        RxJavaUtils.doInIOThread(new RxIOTask<Object>("") {
+    private void initTab() {
+        // 创建第一个Tab页
+        TabHost.TabSpec tab1 = mTabHost.newTabSpec("tab1")
+                .setIndicator("全部") // 设置标题
+                .setContent(R.id.tab01); //设置内容
+        // 添加第一个标签页
+        mTabHost.addTab(tab1);
+        TabHost.TabSpec tab2 = mTabHost.newTabSpec("tab2")
+                .setIndicator("图片")
+                .setContent(R.id.tab02);
+        // 添加第二个标签页
+        mTabHost.addTab(tab2);
+        TabHost.TabSpec tab3 = mTabHost.newTabSpec("tab3")
+                .setIndicator("视频")
+                .setContent(R.id.tab03);
+        // 添加第三个标签页
+        mTabHost.addTab(tab3);
+        mTabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
             @Override
-            public Void doInIOThread(Object o) {
-                MediaStoreManager.getManager(getApplication()).queryImageInfo();
-                return null;
+            public void onTabChanged(String tabId) {
+                Toast.makeText(MainActivity.this, tabId, Toast.LENGTH_SHORT).show();
+                replaceFragment(mVolumes.getValue().get(mCurrentVolumeSeleted).path);
             }
         });
+
     }
 
     /**

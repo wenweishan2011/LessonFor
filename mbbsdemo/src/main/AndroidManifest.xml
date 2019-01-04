@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.jidouauto.refule">
+    package="com.jidouauto.refuletest">
 
 
     <uses-permission android:name="android.car.permission.CAR_DYNAMICS_STATE" />
@@ -35,7 +35,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name="com.jidouauto.refuletest.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

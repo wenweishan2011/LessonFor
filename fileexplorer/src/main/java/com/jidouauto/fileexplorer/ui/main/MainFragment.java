@@ -25,6 +25,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import static com.jidouauto.fileexplorer.MainActivity.TAB_SELECTED;
 import static com.jidouauto.fileexplorer.MainActivity.VOLUME_PATH;
 
 public class MainFragment extends Fragment {
@@ -35,6 +36,7 @@ public class MainFragment extends Fragment {
     private String mVolumePath;
     private MutableLiveData<List<FileInfo>> mChildFiles;
     private MutableLiveData<List<String>> mDirNavData;
+    private int mTabSelected;
 
 
     public static MainFragment newInstance() {
@@ -49,6 +51,7 @@ public class MainFragment extends Fragment {
         mFileView = view.findViewById(R.id.recyclerview);
         mHeadDirNav = view.findViewById(R.id.head_dir_nav);
         mVolumePath = getArguments().getString(VOLUME_PATH);
+        mTabSelected = getArguments().getInt(TAB_SELECTED);
         return view;
     }
 
@@ -86,7 +89,7 @@ public class MainFragment extends Fragment {
         });
 
         final FileListAdapter fileAdapter = new FileListAdapter(this.getContext());
-        mChildFiles = mViewModel.getChildFiles(mVolumePath);
+        mChildFiles = mViewModel.getChildFiles(mVolumePath, mTabSelected);
         mChildFiles.observe(this, new Observer<List<FileInfo>>() {
             @Override
             public void onChanged(List<FileInfo> fileInfos) {
@@ -101,6 +104,20 @@ public class MainFragment extends Fragment {
                 final FileInfo fileInfo = fileAdapter.getFiles().get(adapterPosition);
                 if (fileInfo.isDir) {
                     replaceFragment(fileInfo.path);
+                }
+            }
+
+            @Override
+            public void onItemLongClick(View v, int adapterPosition) {
+                final FileInfo fileInfo = fileAdapter.getFiles().get(adapterPosition);
+                try{
+                    final File file = new File(fileInfo.path);
+//                    if(file.delete())
+//                        Toast.makeText(getContext(), "删除成功", Toast.LENGTH_SHORT).show();
+                }catch(Exception e){
+                    e.printStackTrace();
+                }finally{
+
                 }
             }
         });

@@ -2,17 +2,17 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "49839e32c2fa2432a331b8533391c439",
+    "identityHash": "0a408b36d99b0c03d07e68054e31d5bb",
     "entities": [
       {
-        "tableName": "file_info_table",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`path` TEXT NOT NULL, `parentPath` TEXT, `fileName` TEXT, `mimeType` TEXT, `icon` INTEGER NOT NULL, `lastModified` TEXT, `size` TEXT, `fileTypeForTextView` TEXT, `isDir` INTEGER NOT NULL, `volumePath` TEXT, PRIMARY KEY(`path`))",
+        "tableName": "FileInfo",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`path` TEXT, `parentPath` TEXT, `fileName` TEXT, `mimeType` TEXT, `icon` INTEGER NOT NULL, `lastModified` TEXT, `size` TEXT, `fileTypeForTextView` TEXT, `isDir` INTEGER NOT NULL, `volumePath` TEXT)",
         "fields": [
           {
             "fieldPath": "path",
             "columnName": "path",
             "affinity": "TEXT",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "parentPath",
@@ -70,9 +70,7 @@
           }
         ],
         "primaryKey": {
-          "columnNames": [
-            "path"
-          ],
+          "columnNames": [],
           "autoGenerate": false
         },
         "indices": [],
@@ -81,7 +79,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"49839e32c2fa2432a331b8533391c439\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"0a408b36d99b0c03d07e68054e31d5bb\")"
     ]
   }
 }

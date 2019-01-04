@@ -3,8 +3,8 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.jidouauto.refule"
-        minSdkVersion 26
+        applicationId "com.jidouauto.refuletest"
+        minSdkVersion 28
         targetSdkVersion 28
         versionCode 29
         versionName "1.0"

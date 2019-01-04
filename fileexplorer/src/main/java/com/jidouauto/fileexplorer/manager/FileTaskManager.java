@@ -34,14 +34,38 @@ public class FileTaskManager {
     }
 
     public void listFiles(String parentPath, MutableLiveData<List<FileInfo>> liveData) {
-        RxJavaUtils.executeAsyncTask(new ListFileTask(parentPath).setLiveData(liveData));
+        RxJavaUtils.executeAsyncTask(new ListFilesTask(parentPath).setLiveData(liveData));
 
     }
 
-    private class ListFileTask extends RxAsyncTask<String, List<FileInfo>> {
+    public void deleteFiles( List<FileInfo> dellist,InFileOperateProgressListener listener){
+
+    }
+
+    private interface InFileOperateProgressListener{
+
+    }
+
+ /*   private class DeleteFilesTask extends RxAsyncTask<List<FileInfo>, Integer>{
+
+        @Override
+        public Integer doInIOThread(List<FileInfo> list) {
+            return null;
+        }
+
+
+
+        @Override
+        public void doInUIThread(Integer integer) {
+
+        }
+    }*/
+
+
+    private class ListFilesTask extends RxAsyncTask<String, List<FileInfo>> {
         private MutableLiveData<List<FileInfo>> listLiveData;
 
-        public ListFileTask(String inData) {
+        public ListFilesTask(String inData) {
             super(inData);
         }
 

@@ -1,4 +1,4 @@
-package com.jidouauto.refule;
+package com.jidouauto.refuletest;
 
 import android.Manifest;
 import android.car.hardware.CarPropertyConfig;
@@ -8,23 +8,14 @@ import android.car.hardware.property.ICarProperty;
 import android.content.ComponentName;
 import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
-import android.os.Handler;
+import android.os.Bundle;
 import android.os.IBinder;
-import android.os.Message;
 import android.os.RemoteException;
-import android.support.annotation.NonNull;
 import android.support.car.Car;
 import android.support.car.CarConnectionCallback;
 import android.support.car.CarInfoManager;
-import android.support.car.CarInfoManagerEmbedded;
 import android.support.car.CarNotConnectedException;
-import android.support.car.CarServiceLoaderEmbedded;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +24,10 @@ import com.elektrobit.aed.interfaces.mbbservice.AccessTokenServiceManager;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import vendor.elektrobit.hardware.automotive.vehicle.V1_0.VehicleProperty;
 
 public class MainActivity extends AppCompatActivity {

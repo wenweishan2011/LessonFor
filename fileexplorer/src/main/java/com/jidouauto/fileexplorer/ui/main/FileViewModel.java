@@ -24,8 +24,8 @@ public class FileViewModel extends AndroidViewModel {
         mVolumes = mFileRespository.getCurrentVolumes();
     }
 
-    public MutableLiveData<List<FileInfo>> getChildFiles(String parentPath){
-        mChildFiles = mFileRespository.getChildFileInfos(parentPath);
+    public MutableLiveData<List<FileInfo>> getChildFiles(String parentPath, int mTabSelected){
+        mChildFiles = mFileRespository.getChildFileInfos(parentPath, mTabSelected);
         return mChildFiles;
     }
 

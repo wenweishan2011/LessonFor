@@ -4,10 +4,12 @@ import android.app.Application;
 import android.os.Environment;
 
 import com.jidouauto.fileexplorer.ExplorerApplication;
+import com.jidouauto.fileexplorer.MainActivity;
 import com.jidouauto.fileexplorer.entity.FileInfo;
 import com.jidouauto.fileexplorer.entity.StorageInfo;
 import com.jidouauto.fileexplorer.entity.VolumeInfo;
 import com.jidouauto.fileexplorer.manager.FileTaskManager;
+import com.jidouauto.fileexplorer.manager.MediaStoreManager;
 import com.jidouauto.fileexplorer.util.FileUtil;
 import com.xuexiang.rxutil2.rxjava.RxJavaUtils;
 import com.xuexiang.rxutil2.rxjava.task.RxIOTask;
@@ -32,14 +34,29 @@ public class FileRespository {
         mDirDatas = new MutableLiveData<>();
     }
 
-    public MutableLiveData<List<FileInfo>> getChildFileInfos(String parentPath) {
-        final FileTaskManager manager = FileTaskManager.getManager(ExplorerApplication.getInstance());
-        manager.listFiles(parentPath, mChildFiles);
+    public MutableLiveData<List<FileInfo>> getChildFileInfos(String parentPath, int _type) {
+        MediaStoreManager mediaManager = MediaStoreManager.getManager(ExplorerApplication.getInstance());
+        switch (_type) {
+            case MainActivity.TAB_ALL:
+                final FileTaskManager manager = FileTaskManager.getManager(ExplorerApplication.getInstance());
+                manager.listFiles(parentPath, mChildFiles);
+                break;
+            case MainActivity.TAB_PIC:
+                final List<FileInfo> fileInfos = mediaManager.queryImageInfo(parentPath);
+                mChildFiles.setValue(fileInfos);
+                break;
+            case MainActivity.TAB_VIDEO:
+                final List<FileInfo> fileInfos2 = mediaManager.queryAudioInfo(parentPath);
+                mChildFiles.setValue(fileInfos2);
+                break;
+            default:
+        }
+
         return mChildFiles;
     }
 
     void getVolumeList() {
-        if(mLiveDataVolumes == null){
+        if (mLiveDataVolumes == null) {
             mLiveDataVolumes = new MutableLiveData<>();
         }
         RxJavaUtils.doInIOThread(new RxIOTask<MutableLiveData<List<VolumeInfo>>>(mLiveDataVolumes) {
@@ -48,8 +65,8 @@ public class FileRespository {
                 final String[] customVolumePaths = StorageInfo.getCustomVolumePaths();
                 HashSet<VolumeInfo> volumeList = new HashSet<>();
                 VolumeInfo volumeInfo = null;
-                for(String path : customVolumePaths){
-                    if(Environment.MEDIA_MOUNTED.equals(StorageInfo.getCustomVolumeState(path))){
+                for (String path : customVolumePaths) {
+                    if (Environment.MEDIA_MOUNTED.equals(StorageInfo.getCustomVolumeState(path))) {
                         volumeInfo = new VolumeInfo();
                         volumeInfo.path = path;
                         volumeList.add(volumeInfo);
@@ -63,7 +80,7 @@ public class FileRespository {
         });
     }
 
-    public MutableLiveData<List<VolumeInfo>> getCurrentVolumes(){
+    public MutableLiveData<List<VolumeInfo>> getCurrentVolumes() {
         return mLiveDataVolumes;
     }
 
@@ -73,13 +90,13 @@ public class FileRespository {
             public Void doInIOThread(String s) {
                 final String volumePath = Objects.requireNonNull(FileUtil.getVolumePath(s));
                 List<String> paths = new ArrayList<>();
-                if(!FileUtil.isRoot(s)){
+                if (!FileUtil.isRoot(s)) {
                     String replace = s.replace(volumePath, "");
-                    if(replace.startsWith(File.separator)){
+                    if (replace.startsWith(File.separator)) {
                         replace = replace.substring(1);
                     }
                     paths = Arrays.asList(replace.split(File.separator));
-                }else{
+                } else {
                     paths.add("/");
                 }
                 mDirDatas.postValue(paths);

@@ -1,2 +1,3 @@
 include ':fileexplorer'
+include ':mbbsdemo'
 include /*':app', ':javase_lesson', ':net_lib', ':Rxjava_lib', ':daggerdemo', ':msgserver', ':msgclient', ':mbbsdemo', */':explorerdemo2'

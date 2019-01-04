@@ -34,7 +34,7 @@ public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.FileVi
     public void onBindViewHolder(@NonNull FileViewHolder holder, int position) {
         if(mFiles != null){
             FileInfo current = mFiles.get(position);
-            holder.fileItemView.setText(current.getFileName());
+            holder.fileItemView.setText(current.fileName);
         }else{
             holder.fileItemView.setText("No File");
         }
@@ -62,12 +62,13 @@ public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.FileVi
         return mFiles;
     }
 
-    class FileViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    class FileViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
         private final TextView fileItemView;
 
         public FileViewHolder(@NonNull View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
             fileItemView = itemView.findViewById(R.id.textView);
         }
 
@@ -77,10 +78,20 @@ public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.FileVi
                 mListener.onItemClick(v, getAdapterPosition());
             }
         }
+
+
+        @Override
+        public boolean onLongClick(View v) {
+            if(mListener != null){
+                mListener.onItemLongClick(v, getAdapterPosition());
+            }
+            return true;
+        }
     }
 
     public interface OnItemClickListener{
         void onItemClick(View v, int adapterPosition);
+        void onItemLongClick(View v, int adapterPosition);
     }
 
 }

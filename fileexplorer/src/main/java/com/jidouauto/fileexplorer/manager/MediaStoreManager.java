@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MediaStoreManager {
+    private final String TAG = "explorer" + MediaStoreManager.class.getSimpleName();
+
     private Application mApplication;
 
     private static volatile MediaStoreManager INSTANCE;
@@ -35,7 +37,7 @@ public class MediaStoreManager {
     }
 
 
-    public List<FileInfo> queryAudioInfo() {
+    public List<FileInfo> queryAudioInfo(String volumePath) {
         Cursor cursor = null;
         try {
             cursor = mApplication.getContentResolver().query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
@@ -47,8 +49,9 @@ public class MediaStoreManager {
             if (cursor != null) {
                 List<FileInfo> audioInfo = new ArrayList<>();
                 while (cursor.moveToNext()) {
-                    File file = new File(cursor.getString(0));
-                    if (file.exists()) {
+                    final String path = cursor.getString(0);
+                    File file = new File(path);
+                    if (file.exists() && path.startsWith(volumePath)) {
                         audioInfo.add(AudioInfo.getAudioInfo(cursor.getString(0),
                                 cursor.getString(2),
                                 cursor.getString(4),
@@ -77,7 +80,7 @@ public class MediaStoreManager {
         return "explorer_" + MediaStoreManager.class.getSimpleName();
     }
 
-    private List<FileInfo> queryVideoInfo() {
+    private List<FileInfo> queryVideoInfo(String volumePath) {
         Cursor cursor = null;
         try {
             cursor = mApplication.getContentResolver().query(
@@ -90,8 +93,9 @@ public class MediaStoreManager {
             if (cursor != null) {
                 List<FileInfo> videoInfo = new ArrayList<>();
                 while (cursor.moveToNext()) {
-                    File file = new File(cursor.getString(0));
-                    if (file.exists()) {
+                    final String path = cursor.getString(0);
+                    File file = new File(path);
+                    if (file.exists() && path.startsWith(volumePath)) {
                         videoInfo.add(VideoInfo.getVideoInfo(
                                 cursor.getString(0),
                                 cursor.getString(2),
@@ -116,7 +120,8 @@ public class MediaStoreManager {
         }
     }
 
-    public List<FileInfo> queryImageInfo() {
+    public List<FileInfo> queryImageInfo(String volumePath) {
+        Log.d(TAG, "queryImageInfo: " + volumePath);
         Cursor cursor = null;
         try {
             cursor = mApplication.getContentResolver().query(
@@ -129,8 +134,10 @@ public class MediaStoreManager {
             if (cursor != null) {
                 List<FileInfo> fileInfos = new ArrayList<>();
                 while (cursor.moveToNext()) {
-                    File file = new File(cursor.getString(0));
-                    if (file.exists()) {
+                    final String path = cursor.getString(0);
+                    File file = new File(path);
+                    if (file.exists() && path.startsWith(volumePath)) {
+
                         fileInfos.add(FileInfo.getFileInfo(cursor.getString(0), "image/*"));
                     }
                 }
